@@ -3,11 +3,19 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import ThemeSwitch from "@/components/ui/ThemeSwitch";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function Home() {
   return (
     <>
-      <div className="h-16 bg-primary w-screen flex flex-row place-content-between items-center px-3">
+      <div className="h-16 bg-blue-300 w-screen flex flex-row place-content-between items-center px-3">
         <div className="prose">
           <h1
             style={{
@@ -29,8 +37,6 @@ export default function Home() {
             <code className="font-mono font-bold">src/app/page.js</code>
           </p>
           <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-            <Button>asdf</Button>
-
             <a
               className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
               href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
@@ -48,6 +54,18 @@ export default function Home() {
             </a>
           </div>
         </div>
+        <Card className="absolute bottom-0 w-2/3 p-4">
+          <CardTitle>Chat Interface</CardTitle>
+          <CardDescription>Talking to Patchy the Pirate! 🏴‍☠️</CardDescription>
+          <CardContent>
+            <div className="items-center my-2">
+              <Textarea style={{ resize: "none" }} />
+            </div>
+          </CardContent>
+          <CardFooter className="justify-center">
+            <Button>Submit</Button>
+          </CardFooter>
+        </Card>
       </main>
     </>
   );
