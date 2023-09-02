@@ -15,9 +15,10 @@ import {
 export default function Home() {
   return (
     <>
-      <div className="h-16 bg-blue-300 w-screen flex flex-row place-content-between items-center px-3">
+      <div className="h-16 bg-blue-400 w-screen flex flex-row place-content-between items-center px-3">
         <div className="prose">
           <h1
+            className="text-blue-200"
             style={{
               WebkitUserSelect: "none",
               MozUserSelect: "none",
@@ -25,7 +26,7 @@ export default function Home() {
               userSelect: "none",
             }}
           >
-            Jeff
+            Chatbot
           </h1>
         </div>
         <ThemeSwitch className="place-self-end" />
