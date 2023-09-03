@@ -21,13 +21,11 @@ export default function Home() {
   const [message, setMessage] = useState("");
 
   const handleResize = (reset = false) => {
-    if (ref.current) {
+    if (reset) {
+      ref.current.style.height = "40px";
+    } else if (ref.current && ref.current.scrollHeight > 40) {
       ref.current.style.height = "auto";
-      if (reset) {
-        ref.current.style.height = "50px";
-      } else {
-        ref.current.style.height = `${ref.current.scrollHeight}px`;
-      }
+      ref.current.style.height = `${ref.current.scrollHeight}px`;
     }
   };
 
@@ -75,12 +73,13 @@ export default function Home() {
                 render={({ field }) => (
                   <Textarea
                     {...field}
+                    className="pr-20"
                     ref={ref}
                     style={{ resize: "none" }}
                     value={message}
                     onChange={e => {
                       setMessage(e.target.value);
-                      handleResize();
+                      handleResize(e.target.value === "");
                       field.onChange(e);
                     }}
                   />
@@ -100,7 +99,7 @@ export default function Home() {
               <Button
                 size="icon"
                 variant="outline"
-                className="absolute w-12 h-8 mr-2 right-1 bottom-2.5"
+                className="absolute w-12 h-8 mr-1 right-0.5 bottom-1"
                 type="submit"
               >
                 <PaperPlaneIcon />
