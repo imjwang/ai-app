@@ -32,8 +32,8 @@ export default function Home() {
   const handleform = useCallback(
     data => {
       console.log(data);
-      reset();
       setMessage("");
+      reset({ message: "" });
       handleResize(true);
     },
     [reset]
@@ -43,7 +43,8 @@ export default function Home() {
   useEffect(() => {
     const handleSubmitShortcut = e => {
       if (ref.current === document.activeElement && e.key === "Enter") {
-        if (e.ctrlKey || e.metaKey) {
+        if (!e.shiftKey) {
+          e.preventDefault();
           handleSubmit(handleform)();
         }
       }
