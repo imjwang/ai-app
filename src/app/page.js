@@ -11,61 +11,63 @@ import {
   CardFooter,
   CardTitle,
 } from "@/components/ui/card";
+import { useRef, useState } from "react";
+import { PaperPlaneIcon } from "@radix-ui/react-icons";
 
 export default function Home() {
+  const ref = useRef(null);
+  const [expanded, setExpanded] = useState("right-0 bottom-0");
+  const handleResize = () => {
+    ref.current.style.height = "auto";
+    ref.current.style.height = `${ref.current.scrollHeight}px`;
+    if (ref.current?.scrollHeight > 36) {
+      setExpanded("right-2 bottom-2");
+    } else {
+      setExpanded("right-1 bottom-1");
+    }
+  };
+
   return (
     <>
-      <div className="h-16 bg-blue-400 w-screen flex flex-row place-content-between items-center px-3">
-        <div className="prose">
-          <h1
-            className="text-blue-200"
-            style={{
-              WebkitUserSelect: "none",
-              MozUserSelect: "none",
-              msUserSelect: "none",
-              userSelect: "none",
-            }}
-          >
-            Chatbot
-          </h1>
-        </div>
-        <ThemeSwitch className="place-self-end" />
-      </div>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-          <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-            Get started by editing&nbsp;
-            <code className="font-mono font-bold">src/app/page.js</code>
-          </p>
-          <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-            <a
-              className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
+      <main className="flex min-h-screen flex-col items-center justify-between px-24 pb-24">
+        <div className="h-16 bg-blue-400 w-screen flex flex-row place-content-between items-center px-3">
+          <div className="prose">
+            <h1
+              className="text-blue-200"
+              style={{
+                WebkitUserSelect: "none",
+                MozUserSelect: "none",
+                msUserSelect: "none",
+                userSelect: "none",
+              }}
             >
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className="dark:invert"
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
+              Chatbot
+            </h1>
           </div>
+          <ThemeSwitch className="place-self-end" />
         </div>
-        <Card className="absolute bottom-0 w-2/3 p-4">
+        <Card className="absolute bottom-10 w-3/4 p-4">
           <CardTitle>Chat Interface</CardTitle>
           <CardDescription>Talking to Patchy the Pirate! 🏴‍☠️</CardDescription>
           <CardContent>
-            <div className="items-center my-2">
-              <Textarea style={{ resize: "none" }} />
+            <div className="flex w-full items-center my-2 relative">
+              <Textarea
+                className="pr-24"
+                rows={1}
+                style={{ resize: "none" }}
+                onChange={handleResize}
+                ref={ref}
+              />
+              <Button
+                size="icon"
+                variant="outline"
+                className={`absolute w-12 h-7 ${expanded}`}
+              >
+                <PaperPlaneIcon />
+              </Button>
             </div>
           </CardContent>
-          <CardFooter className="justify-center">
-            <Button>Submit</Button>
-          </CardFooter>
+          <CardFooter className="justify-end"></CardFooter>
         </Card>
       </main>
     </>
