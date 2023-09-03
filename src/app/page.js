@@ -16,14 +16,14 @@ import { PaperPlaneIcon } from "@radix-ui/react-icons";
 
 export default function Home() {
   const ref = useRef(null);
-  const [expanded, setExpanded] = useState("right-0 bottom-0");
+  const [expanded, setExpanded] = useState("right-1 bottom-2.5");
   const handleResize = () => {
     ref.current.style.height = "auto";
     ref.current.style.height = `${ref.current.scrollHeight}px`;
     if (ref.current?.scrollHeight > 36) {
-      setExpanded("right-2 bottom-2");
+      setExpanded("right-2 bottom-2.5");
     } else {
-      setExpanded("right-1 bottom-1");
+      setExpanded("right-1 bottom-2.5");
     }
   };
 
@@ -52,7 +52,7 @@ export default function Home() {
           <CardContent>
             <div className="flex w-full items-center my-2 relative">
               <Textarea
-                className="pr-24"
+                className="py-4 pr-20"
                 rows={1}
                 style={{ resize: "none" }}
                 onChange={handleResize}
@@ -61,7 +61,7 @@ export default function Home() {
               <Button
                 size="icon"
                 variant="outline"
-                className={`absolute w-12 h-7 ${expanded}`}
+                className={`absolute w-12 h-8 mr-2 ${expanded}`}
               >
                 <PaperPlaneIcon />
               </Button>
