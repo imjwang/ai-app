@@ -13,8 +13,8 @@ const ChatForm = () => {
 
   const handleResize = (reset = false) => {
     if (reset) {
-      ref.current.style.height = "40px";
-    } else if (ref.current && ref.current.scrollHeight > 40) {
+      ref.current.style.height = "50px";
+    } else if (ref.current && ref.current.scrollHeight > 50) {
       ref.current.style.height = "auto";
       ref.current.style.height = `${ref.current.scrollHeight}px`;
     }
@@ -63,7 +63,7 @@ const ChatForm = () => {
         render={({ field }) => (
           <Textarea
             {...field}
-            className="pr-20"
+            className="pr-20 text-lg"
             placeholder="Message Patchy the Pirate! 🏴‍☠️"
             ref={ref}
             style={{ resize: "none" }}
