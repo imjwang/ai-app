@@ -64,7 +64,7 @@ const ChatForm = () => {
           <Textarea
             {...field}
             className="pr-20"
-            placeholder="Talking to Patchy the Pirate! 🏴‍☠️"
+            placeholder="Message Patchy the Pirate! 🏴‍☠️"
             ref={ref}
             style={{ resize: "none" }}
             value={message}
