@@ -2,13 +2,13 @@
 
 import { Textarea } from "@/components/ui/textarea";
 import { useForm, Controller } from "react-hook-form";
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState } from "react";
 import SubmitButton from "./submitbutton";
 
-const ChatForm = () => {
-  const { control, handleSubmit, reset } = useForm();
+const ChatForm = ({ setInput, input, handleInputChange, handleSubmit }) => {
+  const { control, reset } = useForm();
+
   const formRef = useRef(null);
-  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleResize = (reset = false) => {
@@ -20,64 +20,60 @@ const ChatForm = () => {
     }
   };
 
-  const handleform = useCallback(
-    data => {
-      console.log(data);
-      setMessage("");
-      reset({ message: "" });
-      handleResize(true);
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-      }, 3000);
-    },
-    [reset]
-  );
+  const handleform = e => {
+    setInput("");
+    reset({ message: "" });
+
+    handleResize(true);
+    setLoading(true);
+    handleSubmit(e);
+
+    setLoading(false);
+  };
 
   const ref = useRef(null);
-  useEffect(() => {
-    const handleSubmitShortcut = e => {
-      if (ref.current === document.activeElement && e.key === "Enter") {
-        if (!e.shiftKey) {
-          e.preventDefault();
-          handleSubmit(handleform)();
-        }
-      }
-    };
-    window.addEventListener("keydown", handleSubmitShortcut);
-    return () => {
-      window.removeEventListener("keydown", handleSubmitShortcut);
-    };
-  }, [handleSubmit, handleform]);
+
+  const handleEnter = e => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      handleform(e);
+    }
+  };
 
   return (
-    <form
-      className="flex items-center my-2 relative"
-      onSubmit={handleSubmit(handleform)}
-      ref={formRef}
-    >
-      <Controller
-        name="message"
-        control={control}
-        rules={{ required: true }}
-        render={({ field }) => (
-          <Textarea
-            {...field}
-            className="pr-20 text-lg"
-            placeholder="Message Patchy the Pirate! 🏴‍☠️"
-            ref={ref}
-            style={{ resize: "none" }}
-            value={message}
-            onChange={e => {
-              setMessage(e.target.value);
-              handleResize(e.target.value === "");
-              field.onChange(e);
-            }}
-          />
-        )}
-      />
-      <SubmitButton loading={loading} disable={message === ""} />
-    </form>
+    <>
+      <form
+        className="flex items-center my-2 relative"
+        onSubmit={handleform}
+        ref={formRef}
+      >
+        <Controller
+          name="message"
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => (
+            <Textarea
+              {...field}
+              className="pr-20 text-lg"
+              placeholder="Message Patchy the Pirate! 🏴‍☠️"
+              ref={ref}
+              style={{ resize: "none" }}
+              value={input}
+              onKeyPress={handleEnter}
+              onChange={e => {
+                handleInputChange(e);
+                handleResize(e.target.value === "");
+                field.onChange(e);
+              }}
+            />
+          )}
+        />
+        <SubmitButton
+          className="absolute w-12 h-10 mr-1 right-0.5 bottom-1"
+          loading={loading}
+          disable={input === ""}
+        />
+      </form>
+    </>
   );
 };
 

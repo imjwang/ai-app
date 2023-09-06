@@ -1,7 +1,9 @@
-const LoadingSpinner = () => {
+import { cn } from "@/lib/utils";
+
+const LoadingSpinner = ({ className }) => {
   return (
-    <div className="inline-flex items-center justify-center absolute w-12 h-8 mr-1 right-0.5 bottom-1">
-      <div className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] text-blue-500"></div>
+    <div className={cn("inline-flex items-center justify-center", className)}>
+      <div className="inline-block h-6 w-6 animate-spin rounded-full border-2 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] text-blue-500"></div>
     </div>
   );
 };
