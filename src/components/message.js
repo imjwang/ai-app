@@ -13,16 +13,19 @@ const messageContainerVariants = cva("flex my-10", {
   defaultVariant: "default",
 });
 
-const messageVariants = cva("prose break-words p-6 w-fit max-w-full", {
-  variants: {
-    variant: {
-      default: "",
-      user: "bg-blue-300 rounded-br-lg rounded-tl-lg",
-      assistant: "bg-green-300 rounded-bl-lg rounded-tr-lg",
+const messageVariants = cva(
+  "prose break-words p-6 w-fit max-w-full whitespace-pre-wrap",
+  {
+    variants: {
+      variant: {
+        default: "",
+        user: "bg-blue-300 rounded-br-lg rounded-tl-lg",
+        assistant: "bg-green-300 rounded-bl-lg rounded-tr-lg",
+      },
     },
-  },
-  defaultVariant: "default",
-});
+    defaultVariant: "default",
+  }
+);
 
 const MessageContainer = ({ variant, children }) => {
   return (
