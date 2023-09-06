@@ -15,8 +15,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <NavBar />
-          {children}
+          <div className="flex flex-col h-[100vh] bg-stone-100 dark:bg-stone-900">
+            <NavBar />
+            {children}
+          </div>
         </ThemeProvider>
       </body>
     </html>
