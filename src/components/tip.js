@@ -1,6 +1,10 @@
-const Tip = () => {
+const Tip = ({ isFocused }) => {
   return (
-    <div className="prose dark:prose-invert tracking-tight text-xs">
+    <div
+      className={`prose dark:prose-invert tracking-tight text-xs ${
+        isFocused ? "" : "invisible"
+      }`}
+    >
       <p>
         <strong>
           Press{" "}

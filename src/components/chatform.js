@@ -5,7 +5,14 @@ import { useForm, Controller } from "react-hook-form";
 import { useRef, useState } from "react";
 import SubmitButton from "./submitbutton";
 
-const ChatForm = ({ setInput, input, handleInputChange, handleSubmit }) => {
+const ChatForm = ({
+  setInput,
+  input,
+  handleInputChange,
+  handleSubmit,
+  placeholder = "Message Patchy the Pirate! 🏴‍☠️",
+  setIsFocused,
+}) => {
   const { control, reset } = useForm();
 
   const formRef = useRef(null);
@@ -54,11 +61,13 @@ const ChatForm = ({ setInput, input, handleInputChange, handleSubmit }) => {
             <Textarea
               {...field}
               className="pr-20 text-lg"
-              placeholder="Message Patchy the Pirate! 🏴‍☠️"
+              placeholder={placeholder}
               ref={ref}
               style={{ resize: "none" }}
               value={input}
               onKeyPress={handleEnter}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
               onChange={e => {
                 handleInputChange(e);
                 handleResize(e.target.value === "");

@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-const messageContainerVariants = cva("flex my-10", {
+const messageContainerVariants = cva("flex my-2", {
   variants: {
     variant: {
       default: "justify-center",

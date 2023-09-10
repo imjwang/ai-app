@@ -1,32 +1,29 @@
 "use client";
 
-import Tip from "./tip";
-import ChatForm from "./chatform";
 import { useChat } from "ai/react";
 import Message from "@/components/message";
+import { useState } from "react";
+import ChatInput from "./chatinput";
 
-const ChatBox = () => {
+const Chat = () => {
   const { setInput, input, handleInputChange, handleSubmit, messages } =
     useChat();
 
   return (
-    <div className="flex flex-col items-center pb-12 px-24 grow overflow-hidden">
+    <div className="flex flex-col items-center pb-12 px-64 grow overflow-hidden">
       <div className="flex flex-col-reverse grow w-full mb-4 overflow-auto transition-[flex-grow] ease-in-out">
         {[...messages].reverse().map(({ role, content, id }) => {
           return <Message key={id} variant={role} message={content} />;
         })}
       </div>
-      <div className="flex w-full flex-col">
-        <ChatForm
-          setInput={setInput}
-          input={input}
-          handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}
-        />
-        <Tip />
-      </div>
+      <ChatInput
+        setInput={setInput}
+        input={input}
+        handleInputChange={handleInputChange}
+        handleSubmit={handleSubmit}
+      />
     </div>
   );
 };
 
-export default ChatBox;
+export default Chat;
