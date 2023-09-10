@@ -23,6 +23,7 @@ export default function Page() {
           input={input}
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
+          placeholder="Talk to your documents..."
         />
       </div>
     </div>
