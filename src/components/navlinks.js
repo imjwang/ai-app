@@ -42,6 +42,19 @@ const NavMenu = () => {
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
+        <NavigationMenuItem
+          className={`${
+            pathname === "/upload"
+              ? "text-primary border-b-2 border-primary"
+              : ""
+          }`}
+        >
+          <Link href="/upload" legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              Upload
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
   );
