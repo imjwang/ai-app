@@ -16,9 +16,13 @@ import {
 import Chat from "@/components/chat";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 const NavBar = () => {
   const router = useRouter();
+  const isMobile = window?.innerWidth < 640;
+  console.log(isMobile);
+
   return (
     <nav className="h-fit bg-green-700 dark:bg-background w-screen flex flex-col">
       <div className="flex flex-row place-content-between items-center p-2">
@@ -42,18 +46,24 @@ const NavBar = () => {
         <NavMenu />
         <Dialog>
           <DialogTrigger asChild>
-            <div
-              style={{
-                WebkitUserSelect: "none",
-                MozUserSelect: "none",
-                msUserSelect: "none",
-                userSelect: "none",
-              }}
-              className="flex space-x-10 items-center mx-2 h-8 border bg-background border-black dark:border-stone-500 w-40 rounded-md pl-2 cursor-pointer text-sm"
-            >
-              <p className="text-stone-700 dark:text-stone-400">Search...</p>
-              <p className="text-stone-400 dark:text-stone-700">⌘ K</p>
-            </div>
+            {isMobile ? (
+              <div className="relative">
+                <MagnifyingGlassIcon className="w-7 h-7 absolute bottom-1 right-1" />
+              </div>
+            ) : (
+              <div
+                style={{
+                  WebkitUserSelect: "none",
+                  MozUserSelect: "none",
+                  msUserSelect: "none",
+                  userSelect: "none",
+                }}
+                className="flex space-x-10 items-center mx-2 h-8 border bg-background border-black dark:border-stone-500 w-40 rounded-md pl-2 cursor-pointer text-sm"
+              >
+                <p className="text-stone-700 dark:text-stone-400">Search...</p>
+                <p className="text-stone-400 dark:text-stone-700">⌘ K</p>
+              </div>
+            )}
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
