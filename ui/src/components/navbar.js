@@ -49,7 +49,7 @@ const NavBar = () => {
                 msUserSelect: "none",
                 userSelect: "none",
               }}
-              className="flex space-x-4 items-center mx-2 h-8 border bg-background border-black dark:border-stone-500 w-32 rounded-md pl-2 cursor-pointer text-sm"
+              className="flex space-x-10 items-center mx-2 h-8 border bg-background border-black dark:border-stone-500 w-40 rounded-md pl-2 cursor-pointer text-sm"
             >
               <p className="text-stone-700 dark:text-stone-400">Search...</p>
               <p className="text-stone-400 dark:text-stone-700">⌘ K</p>
