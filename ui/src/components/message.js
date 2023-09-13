@@ -6,8 +6,8 @@ const messageContainerVariants = cva("flex my-2", {
   variants: {
     variant: {
       default: "justify-center",
-      user: "justify-start sm:mr-4 md:mr-8 lg:mr-12",
-      assistant: "justify-end sm:ml-4 md:ml-8 lg:ml-12",
+      assistant: "justify-start sm:mr-4 md:mr-8 lg:mr-12",
+      user: "justify-end sm:ml-4 md:ml-8 lg:ml-12",
     },
   },
   defaultVariant: "default",
