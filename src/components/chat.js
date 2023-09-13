@@ -21,6 +21,7 @@ const Chat = () => {
         input={input}
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
+        placeholder="Send a Message..."
       />
     </div>
   );

@@ -1,17 +1,13 @@
 "use client";
+
 import { RenderConversations } from "@/components/documentchat";
-import { useState } from "react";
-import ChatForm from "@/components/chatform";
 import { useChat } from "ai/react";
-import Tip from "@/components/tip";
 import ChatInput from "@/components/chatinput";
-import Chat from "@/components/chat";
 
 export default function Page() {
   const { setInput, input, handleInputChange, handleSubmit, messages } =
     useChat();
 
-  // console.log(messages);
   return (
     <div className="flex h-5/6 w-[44vw] flex-col items-center border-r-2 p-3">
       <div className="flex w-[44vw] flex-grow flex-col overflow-scroll">
@@ -24,6 +20,7 @@ export default function Page() {
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
           placeholder="Talk to your documents..."
+          tip={false}
         />
       </div>
     </div>
