@@ -20,8 +20,10 @@ import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 const NavBar = () => {
   const router = useRouter();
-  const isMobile = window?.innerWidth < 640;
-  console.log(isMobile);
+  let isMobile = false;
+  if (typeof window !== "undefined") {
+    isMobile = window?.innerWidth < 640;
+  }
 
   return (
     <nav className="h-fit bg-green-700 dark:bg-background w-screen flex flex-col">
