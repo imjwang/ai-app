@@ -1,35 +1,51 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# UI (next.js and typescript) specific in the 'ui' directory
+
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
+ui/node_modules/
+ui/.pnp
+ui/.pnp.js
 
 # testing
-/coverage
+ui/coverage
 
 # next.js
-/.next/
-/out/
+ui/.next/
+ui/out/
 
 # production
-/build
-
-# misc
-.DS_Store
-*.pem
+ui/build
 
 # debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+ui/npm-debug.log*
+ui/yarn-debug.log*
+ui/yarn-error.log*
 
 # local env files
-.env*.local
+ui/.env*.local
 
 # vercel
-.vercel
+ui/.vercel
 
 # typescript
-*.tsbuildinfo
-next-env.d.ts
+ui/*.tsbuildinfo
+ui/next-env.d.ts
+
+# SERVER (FastAPI) specific in the 'server' directory
+
+# dependencies
+server/**/venv/     # Virtual environment
+server/**/__pycache__/
+
+# Python cache files
+server/*.pyc
+server/*.pyo
+server/*.egg-info
+
+# FastAPI specific
+server/db.sqlite3      # If using SQLite as database
+
+# Common misc items
+.DS_Store
+*.pem
