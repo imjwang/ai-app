@@ -2,11 +2,11 @@
 module.exports = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{js,jsx}',
-    './components/**/*.{js,jsx}',
-    './app/**/*.{js,jsx}',
-    './src/**/*.{js,jsx}',
-	],
+    "./pages/**/*.{js,jsx}",
+    "./components/**/*.{js,jsx}",
+    "./app/**/*.{js,jsx}",
+    "./src/**/*.{js,jsx}",
+  ],
   theme: {
     container: {
       center: true,
@@ -65,12 +65,17 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
         },
+        "fade-in": {
+          "0%": { opacity: 0 },
+          "100%": { opacity: 1 },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        emerge: "fade-in 2000ms",
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require('@tailwindcss/typography')],
-}
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+};

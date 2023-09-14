@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { UploadIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";

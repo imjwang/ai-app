@@ -6,7 +6,7 @@ const ExamplePrompts = ({
   placeholder = "Ask questions about the documents you've selected",
 }) => {
   return (
-    <div className="flex h-full items-center justify-center prose">
+    <div className="flex h-full items-center justify-center prose animate-emerge">
       <div className="flex w-full flex-col items-center justify-center dark:text-white">
         <h1 className="mb-2 w-3/4 text-center font-bold dark:text-stone-600">
           {placeholder}
