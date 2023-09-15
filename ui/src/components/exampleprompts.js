@@ -2,8 +2,8 @@ import { Button } from "@/components/ui/button";
 
 const ExamplePrompts = ({
   exampleTexts = [],
-  setUserMessage,
   placeholder = "Ask questions about the documents you've selected",
+  handleClick,
 }) => {
   return (
     <div className="flex h-full items-center justify-center prose animate-emerge">
@@ -16,7 +16,7 @@ const ExamplePrompts = ({
             return (
               <Button
                 key={t}
-                onClick={() => setUserMessage(t)}
+                onClick={() => handleClick(t)}
                 className="rounded-full m-2"
                 variant="outline"
               >

@@ -12,6 +12,7 @@ const ChatForm = ({
   handleSubmit,
   placeholder = "Message Patchy the Pirate! 🏴‍☠️",
   setIsFocused,
+  chatRef,
 }) => {
   const { control, reset } = useForm();
 
@@ -20,10 +21,10 @@ const ChatForm = ({
 
   const handleResize = (reset = false) => {
     if (reset) {
-      ref.current.style.height = "50px";
-    } else if (ref.current && ref.current.scrollHeight > 50) {
-      ref.current.style.height = "auto";
-      ref.current.style.height = `${ref.current.scrollHeight}px`;
+      chatRef.current.style.height = "50px";
+    } else if (chatRef.current && chatRef.current.scrollHeight > 50) {
+      chatRef.current.style.height = "auto";
+      chatRef.current.style.height = `${chatRef.current.scrollHeight}px`;
     }
   };
 
@@ -37,8 +38,6 @@ const ChatForm = ({
 
     setLoading(false);
   };
-
-  const ref = useRef(null);
 
   const handleEnter = e => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -62,7 +61,7 @@ const ChatForm = ({
               {...field}
               className="pr-20 text-lg"
               placeholder={placeholder}
-              ref={ref}
+              ref={chatRef}
               style={{ resize: "none" }}
               value={input}
               onKeyPress={handleEnter}

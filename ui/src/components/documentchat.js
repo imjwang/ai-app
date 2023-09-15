@@ -210,11 +210,7 @@ const AssistantDisplay = ({ message, documents }) => {
   );
 };
 
-export const RenderConversations = ({
-  messages,
-  documents,
-  setUserMessage,
-}) => {
+export const RenderConversations = ({ messages, documents, handleClick }) => {
   const lastElementRef = useRef(null);
 
   useEffect(() => {
@@ -231,7 +227,7 @@ export const RenderConversations = ({
           "Who is Alexander Hamilton?",
           "What are the biggest discussed risks?",
         ]}
-        setUserMessage={setUserMessage}
+        handleClick={handleClick}
       />
     );
   }

@@ -2,7 +2,7 @@
 
 import { useChat } from "ai/react";
 import Message from "@/components/message";
-import { useState } from "react";
+import { useRef } from "react";
 import ChatInput from "./chatinput";
 import { cn } from "@/lib/utils";
 import ExamplePrompts from "@/components/exampleprompts";
@@ -10,6 +10,13 @@ import ExamplePrompts from "@/components/exampleprompts";
 const Chat = ({ className }) => {
   const { setInput, input, handleInputChange, handleSubmit, messages } =
     useChat();
+  const chatRef = useRef(null);
+  const handleClick = t => {
+    setInput(t);
+    if (chatRef) {
+      chatRef.current.focus();
+    }
+  };
 
   return (
     <div
@@ -26,7 +33,7 @@ const Chat = ({ className }) => {
             "Who is Alexander Hamilton?",
             "What are the biggest discussed risks?",
           ]}
-          setUserMessage={setInput}
+          handleClick={handleClick}
         />
       ) : (
         <div className="flex flex-col-reverse grow w-full mb-4 overflow-auto transition-[flex-grow] ease-in-out">
@@ -42,6 +49,7 @@ const Chat = ({ className }) => {
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
         placeholder="Send a Message..."
+        chatRef={chatRef}
       />
     </div>
   );
