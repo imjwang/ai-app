@@ -11,8 +11,8 @@ export default function Page() {
 
   const chatRef = useRef(null);
 
-  const handleClick = e => {
-    setInput(e.key);
+  const handleClick = t => {
+    setInput(t);
     if (chatRef) {
       chatRef.current.focus();
     }
