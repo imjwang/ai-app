@@ -8,7 +8,7 @@ const llamaCpp = new OpenAI({
 
 export const runtime = "edge";
 
-export async function POST(req: Request) {
+export async function POST(req) {
   const { messages } = await req.json();
   const response = await llamaCpp.chat.completions.create({
     model: "gpt-3.5-turbo",
