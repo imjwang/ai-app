@@ -1,9 +1,9 @@
-import ChatInput from "@/components/chat/input";
+import Chat from "@/components/chat";
 
 export default function Home() {
   return (
-    <div className="p-32">
-      <ChatInput />
-    </div>
+    <>
+      <Chat className="p-2 lg:pb-12 lg:px-64 md:px-48 md:pb-8 sm:px-32 sm:pb-6" />
+    </>
   );
 }
