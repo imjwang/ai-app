@@ -1,9 +1,9 @@
-import Chat from "@/components/chat";
+import FileInput from "./file-input";
 
-export default function Home() {
+export default function Page() {
   return (
-    <>
-      <Chat className="p-2 lg:pb-12 lg:px-64 md:px-48 md:pb-8 sm:px-32 sm:pb-6" />
-    </>
+    <div className="flex p-2 sm:p-6 md:p-12 h-full w-full justify-center">
+      <FileInput />
+    </div>
   );
 }
