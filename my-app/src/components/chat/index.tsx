@@ -2,20 +2,55 @@
 import Input from "./input";
 
 import { useChat } from "ai/react";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 // import ExamplePrompts from "@/components/exampleprompts";
+import MessageBox from "./message-box";
 import Message from "./message";
 
 interface ChatProps {
   className?: string;
+  ChatInput?: React.ComponentType<any>;
+  ChatBox?: React.ComponentType<any>;
+  Placeholder?: React.ComponentType<any>;
 }
 
-export default function Chat({ className }: ChatProps) {
-  const { setInput, input, handleInputChange, handleSubmit, messages } =
-    useChat();
+export default function Chat({
+  className,
+  ChatInput = Input,
+  ChatBox = MessageBox,
+  Placeholder = Message,
+}: ChatProps) {
+  const {
+    setInput,
+    input,
+    handleInputChange,
+    handleSubmit,
+    messages,
+    isLoading,
+  } = useChat();
 
   const chatRef = useRef<HTMLTextAreaElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    if (containerRef.current) {
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
+  };
+
+  useEffect(() => {
+    if (isLoading === false) {
+      scrollToBottom();
+    }
+  }, [isLoading]);
+
+  const handleClick = (t: string) => {
+    setInput(t);
+    if (chatRef) {
+      chatRef.current!.focus();
+    }
+  };
 
   return (
     <div
@@ -25,15 +60,11 @@ export default function Chat({ className }: ChatProps) {
       )}
     >
       {messages.length === 0 ? (
-        <p>asdf</p>
+        <Placeholder handleClick={handleClick} />
       ) : (
-        <div className="flex flex-col-reverse grow w-full mb-4 overflow-auto transition-[flex-grow] ease-in-out">
-          {[...messages].reverse().map(({ role, content, id }) => {
-            return <Message key={id} variant={role} message={content} />;
-          })}
-        </div>
+        <MessageBox messages={messages} ref={containerRef} />
       )}
-      <Input
+      <ChatInput
         setInput={setInput}
         input={input}
         handleInputChange={handleInputChange}

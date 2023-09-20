@@ -1,4 +1,4 @@
-import "../globals.css";
+import "./globals.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import JotaiProvider from "@/components/jotai-provider";
@@ -22,12 +22,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body className={inter.className}>
           <JotaiProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-              disableTransitionOnChange
-            >
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <div className="flex flex-col h-[100vh] bg-stone-100 dark:bg-stone-900">
                 <NavBar />
                 {children}
