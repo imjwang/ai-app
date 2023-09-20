@@ -6,10 +6,15 @@ import { useRef } from "react";
 import ChatInput from "./chatinput";
 import { cn } from "@/lib/utils";
 import ExamplePrompts from "@/components/exampleprompts";
+import { getGreeter } from "@jwai/npm-test";
 
 const Chat = ({ className }) => {
   const { setInput, input, handleInputChange, handleSubmit, messages } =
     useChat();
+
+  const t = getGreeter({ name: "Jeff", age: 25, happiness: 11 });
+  t.greet();
+
   const chatRef = useRef(null);
   const handleClick = t => {
     setInput(t);
