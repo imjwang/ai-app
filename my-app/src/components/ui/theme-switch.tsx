@@ -4,7 +4,11 @@ import { useTheme } from "next-themes";
 import { Switch } from "@/components/ui/switch";
 import ThemeIcon from "./theme-icon";
 
-const ThemeSwitch = () => {
+interface ThemeSwitchProps {
+  className?: string;
+}
+
+const ThemeSwitch = ({ className }: ThemeSwitchProps) => {
   const { theme, setTheme } = useTheme();
   const handleCheck = () => {
     setTheme(theme === "dark" ? "light" : "dark");
