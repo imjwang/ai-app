@@ -7,7 +7,6 @@ import ChatInput from "./chatinput";
 import { cn } from "@/lib/utils";
 import ExamplePrompts from "@/components/exampleprompts";
 import { getGreeter } from "@jwai/npm-test";
-import { Container } from "lucide-react";
 
 const Chat = ({ className }) => {
   const {

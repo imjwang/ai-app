@@ -6,20 +6,22 @@ import { useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 // import ExamplePrompts from "@/components/exampleprompts";
 import MessageBox from "./message-box";
-import Message from "./message";
+import Annoucement from "./announcement";
 
 interface ChatProps {
   className?: string;
   ChatInput?: React.ComponentType<any>;
   ChatBox?: React.ComponentType<any>;
-  Placeholder?: React.ComponentType<any>;
+  Announcement?: React.ComponentType<any>;
+  announcements?: string[];
 }
 
 export default function Chat({
   className,
   ChatInput = Input,
   ChatBox = MessageBox,
-  Placeholder = Message,
+  Announcement = Annoucement,
+  announcements = [],
 }: ChatProps) {
   const {
     setInput,
@@ -60,9 +62,9 @@ export default function Chat({
       )}
     >
       {messages.length === 0 ? (
-        <Placeholder handleClick={handleClick} />
+        <Announcement handleClick={handleClick} announcements={announcements} />
       ) : (
-        <MessageBox messages={messages} ref={containerRef} />
+        <ChatBox messages={messages} ref={containerRef} />
       )}
       <ChatInput
         setInput={setInput}
@@ -70,6 +72,7 @@ export default function Chat({
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
         chatRef={chatRef}
+        placeholder="Send a message!"
       />
     </div>
   );

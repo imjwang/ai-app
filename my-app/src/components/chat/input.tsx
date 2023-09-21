@@ -33,6 +33,7 @@ const ChatInput = ({
         handleSubmit={handleSubmit}
         setIsFocused={setIsFocused}
         chatRef={chatRef}
+        placeholder={placeholder}
       />
       {tip && <Tip isFocused={isFocused} />}
     </div>

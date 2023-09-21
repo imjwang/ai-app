@@ -42,7 +42,7 @@ const FileInput = () => {
           </div>
         </div>
       ) : (
-        <div className="grid h-full md:h-3/4 w-full md:w-1/2 items-center gap-1.5 bg-background">
+        <div className="grid h-full lg:h-3/4 w-full lg:w-1/2 sm:w-3/4 items-center gap-1.5 bg-background">
           <Input
             className="cursor-pointer h-full w-full border-8 hover:border-green-700 border-dashed z-10 bg-transparent"
             type="file"
