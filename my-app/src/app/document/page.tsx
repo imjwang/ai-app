@@ -1,10 +1,8 @@
 "use client";
 
-import { RenderConversations } from "@/components/documentchat";
+// import { RenderConversations } from "@/components/documentchat";
 import { useChat } from "ai/react";
 import { useRef } from "react";
-import ChatInput from "@/components/chatinput";
-import Chat from "@/components/chat";
 import { getDate } from "@/lib/utils";
 
 export default function Page() {
@@ -15,6 +13,7 @@ export default function Page() {
 
   return (
     <div className="flex h-5/6 w-[44vw] flex-col items-center border-r-2 p-3">
+      Placeholder
       {/* <div className="flex w-[44vw] flex-grow flex-col overflow-scroll">
         <RenderConversations
           messages={messages}
