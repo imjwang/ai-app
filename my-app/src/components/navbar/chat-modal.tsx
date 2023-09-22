@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import Chat from "@/components/chat";
+// import Chat from "@/components/chat";
 import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 export default function ChatModal() {
@@ -25,15 +25,7 @@ export default function ChatModal() {
             <MagnifyingGlassIcon className="w-7 h-7 absolute bottom-1 right-1" />
           </div>
         ) : (
-          <div
-            style={{
-              WebkitUserSelect: "none",
-              MozUserSelect: "none",
-              msUserSelect: "none",
-              userSelect: "none",
-            }}
-            className="flex space-x-10 items-center mx-2 h-8 border bg-background border-black dark:border-stone-500 w-40 rounded-md pl-2 cursor-pointer text-sm"
-          >
+          <div className="flex space-x-10 items-center mx-2 h-8 border bg-background border-black dark:border-stone-500 w-40 rounded-md pl-2 cursor-pointer text-sm select-none">
             <p className="text-stone-700 dark:text-stone-400">Search...</p>
             <p className="text-stone-400 dark:text-stone-700">⌘ K</p>
           </div>
@@ -44,7 +36,7 @@ export default function ChatModal() {
           <DialogTitle>Chat Dialog</DialogTitle>
           <DialogDescription>ask anything</DialogDescription>
         </DialogHeader>
-        <Chat className="p-5" />
+        {/* <Chat className="p-5" /> */}
         {/* <div className="grid gap-4 py-4">
       <div className="grid grid-cols-4 items-center gap-4">
         <Label htmlFor="name" className="text-right">

@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 // import ExamplePrompts from "@/components/exampleprompts";
 import MessageBox from "./message-box";
 import Annoucement from "./announcement";
-import { atom, useAtom } from "jotai";
+import { useAtom } from "jotai";
 import { inputAtom } from "@/lib/utils";
 
 interface ChatProps {
@@ -59,7 +59,7 @@ export default function Chat({
       )}
     >
       {messages.length === 0 ? (
-        <Announcement handleClick={handleClick} announcements={announcements} />
+        <Announcement announcements={announcements} />
       ) : (
         <ChatBox messages={messages} ref={containerRef} />
       )}

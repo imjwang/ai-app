@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { inputAtom } from "@/lib/utils";
+import { useAtom } from "jotai";
 
 interface AnnouncementProps {
   announcements?: string[];
@@ -9,8 +11,9 @@ interface AnnouncementProps {
 const Announcement = ({
   announcements = [],
   title = "ChatUI",
-  handleClick,
 }: AnnouncementProps) => {
+  const [input, setInput] = useAtom(inputAtom);
+
   return (
     <div className="flex h-full items-center justify-center prose animate-emerge">
       <div className="flex w-full flex-col items-center justify-center dark:text-white">
@@ -22,7 +25,7 @@ const Announcement = ({
             return (
               <Button
                 key={t}
-                onClick={() => handleClick(t)}
+                onClick={() => setInput(t)}
                 className="rounded-full m-2"
                 variant="outline"
               >
