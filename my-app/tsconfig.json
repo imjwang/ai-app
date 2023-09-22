@@ -14,6 +14,8 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    // need this for local package testing
+    "preserveSymlinks": true,
     "plugins": [
       {
         "name": "next"

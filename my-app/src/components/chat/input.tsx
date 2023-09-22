@@ -5,8 +5,6 @@ import ChatForm from "./form";
 import { useState } from "react";
 
 interface ChatInputProps {
-  setInput: React.Dispatch<React.SetStateAction<string>>;
-  input: string;
   handleInputChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   placeholder?: string;
@@ -15,8 +13,6 @@ interface ChatInputProps {
 }
 
 const ChatInput = ({
-  setInput,
-  input,
   handleSubmit,
   handleInputChange,
   placeholder,
@@ -27,9 +23,6 @@ const ChatInput = ({
   return (
     <div className="flex w-full flex-col">
       <ChatForm
-        setInput={setInput}
-        input={input}
-        handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
         setIsFocused={setIsFocused}
         chatRef={chatRef}

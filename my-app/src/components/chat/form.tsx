@@ -1,11 +1,10 @@
 import { Textarea } from "@/components/ui/textarea";
 import { useRef, useState } from "react";
 import SendButton from "./send";
+import { useAtom } from "jotai";
+import { inputAtom } from "@/lib/utils";
 
 interface ChatFormProps {
-  setInput: React.Dispatch<React.SetStateAction<string>>;
-  input: string;
-  handleInputChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   placeholder?: string;
   setIsFocused: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,9 +12,6 @@ interface ChatFormProps {
 }
 
 const ChatForm = ({
-  setInput,
-  input,
-  handleInputChange,
   handleSubmit,
   placeholder = "Message Patchy the Pirate! 🏴‍☠️",
   setIsFocused,
@@ -23,6 +19,8 @@ const ChatForm = ({
 }: ChatFormProps) => {
   const formRef = useRef(null);
   const [loading, setLoading] = useState(false);
+
+  const [input, setInput] = useAtom(inputAtom);
 
   const handleResize = (reset = false) => {
     if (reset) {
@@ -34,10 +32,9 @@ const ChatForm = ({
   };
 
   const handleform = (e: React.FormEvent<HTMLFormElement>) => {
-    setInput("");
-
     handleResize(true);
     setLoading(true);
+    console.log(handleSubmit);
     handleSubmit(e);
 
     setLoading(false);
@@ -57,16 +54,15 @@ const ChatForm = ({
     >
       <div className="w-full ">
         <Textarea
-          className="pr-20 text-lg"
+          className="pr-20 text-lg resize-none"
           placeholder={placeholder}
           ref={chatRef}
-          style={{ resize: "none" }}
           value={input}
           onKeyPress={handleEnter}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           onChange={e => {
-            handleInputChange(e);
+            setInput(e.target.value);
             handleResize(e.target.value === "");
           }}
         />
@@ -74,7 +70,7 @@ const ChatForm = ({
       <SendButton
         className="absolute w-12 h-10 mr-1 right-0.5 bottom-1"
         loading={loading}
-        disable={input === ""}
+        disable={input === "" || loading}
       />
     </form>
   );

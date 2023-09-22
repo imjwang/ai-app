@@ -1,12 +1,14 @@
 "use client";
 import Input from "./input";
 
-import { useChat } from "ai/react";
-import { useRef, useEffect } from "react";
+import { useChat } from "@/lib/ai";
+import { useRef, useEffect, useMemo } from "react";
 import { cn } from "@/lib/utils";
 // import ExamplePrompts from "@/components/exampleprompts";
 import MessageBox from "./message-box";
 import Annoucement from "./announcement";
+import { atom, useAtom } from "jotai";
+import { inputAtom } from "@/lib/utils";
 
 interface ChatProps {
   className?: string;
@@ -23,14 +25,9 @@ export default function Chat({
   Announcement = Annoucement,
   announcements = [],
 }: ChatProps) {
-  const {
-    setInput,
-    input,
-    handleInputChange,
-    handleSubmit,
-    messages,
-    isLoading,
-  } = useChat();
+  const { handleSubmit, messages, isLoading } = useChat({ inputAtom });
+
+  const [input, setInput] = useAtom(inputAtom);
 
   const chatRef = useRef<HTMLTextAreaElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -67,9 +64,6 @@ export default function Chat({
         <ChatBox messages={messages} ref={containerRef} />
       )}
       <ChatInput
-        setInput={setInput}
-        input={input}
-        handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
         chatRef={chatRef}
         placeholder="Send a message!"
