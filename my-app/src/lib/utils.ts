@@ -18,3 +18,5 @@ export const getDate = (date: Date | undefined) => {
 };
 
 export const inputAtom = atom("");
+
+export const chatAtom = atom("");

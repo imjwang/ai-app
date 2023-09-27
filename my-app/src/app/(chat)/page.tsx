@@ -1,3 +1,4 @@
+"use client";
 import Chat from "@/components/chat";
 
 export default function Home() {
@@ -11,6 +12,16 @@ export default function Home() {
           "What is the largest country in the world?",
         ]}
       />
+      <button
+        onClick={async () => {
+          const t = await fetch("api/ingest", {
+            method: "GET",
+          });
+          console.log(await t.json());
+        }}
+      >
+        awefaesfawef
+      </button>
     </>
   );
 }
