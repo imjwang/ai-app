@@ -34,7 +34,6 @@ const ChatForm = ({
   const handleform = (e: React.FormEvent<HTMLFormElement>) => {
     handleResize(true);
     setLoading(true);
-    console.log(handleSubmit);
     handleSubmit(e);
 
     setLoading(false);

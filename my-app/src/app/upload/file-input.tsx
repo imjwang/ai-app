@@ -12,6 +12,7 @@ const FileInput = () => {
   };
 
   const handleSubmit = async () => {
+    //TODO change the html to a form
     if (file) {
       const formData = new FormData();
       formData.append("file", file);
@@ -22,8 +23,11 @@ const FileInput = () => {
           body: formData,
         });
         const data = await response.json();
+        console.log(data);
       } catch (error) {
         console.error("Error uploading file:", error);
+      } finally {
+        setFile(null);
       }
     }
   };

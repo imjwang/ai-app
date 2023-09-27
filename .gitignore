@@ -37,6 +37,8 @@ ui/next-env.d.ts
 # dependencies
 server/**/venv/     # Virtual environment
 server/**/__pycache__/
+server/**/db/       # Database 
+server/.env
 
 # Python cache files
 server/*.pyc
