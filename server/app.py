@@ -78,7 +78,7 @@ llm = ChatOpenAI(
     verbose=True,
     callbacks=[callback],
 )
-qa = RetrievalQA.from_llm(llm, retriever=db.as_retriever())
+qa = RetrievalQA.from_llm(llm, retriever=db.as_retriever(), verbose=True)
 
 text_splitter = RecursiveCharacterTextSplitter(
     chunk_size=256,
@@ -154,6 +154,8 @@ async def chat(request: Request, message: Message):
 
 
 async def send_message(message: str) -> AsyncIterable[str]:
+    response_tokens = ""
+    print(message)
 
     async def wrap_done(fn: Awaitable, event: asyncio.Event):
         """Wrap an awaitable with a event to signal when it's done or an exception is raised."""
@@ -167,13 +169,16 @@ async def send_message(message: str) -> AsyncIterable[str]:
             event.set()
 
     # Begin a task that runs in the background.
+    # test getting chat history
     task = asyncio.create_task(wrap_done(
-        qa.arun(message),
+        qa.acall(inputs=message),
         callback.done),
     )
 
     async for token in callback.aiter():
         # Use server-sent-events to stream the response
+        response_tokens += token
+        print(token, flush=True)
         test = {'data': token}
         yield f"data: {json.dumps(test)}"
 

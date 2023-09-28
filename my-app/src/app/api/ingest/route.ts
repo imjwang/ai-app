@@ -1,10 +1,9 @@
-import { COMPLEX_HEADER, createChunkDecoder } from "ai";
 import { NextResponse } from "next/server";
 // import { useSetAtom } from "jotai";
 // import { chatAtom } from "@/lib/utils";
 
 export async function GET() {
-  const body = JSON.stringify({ message: "What does Jeff's father do?" });
+  const body = JSON.stringify({ message: "Where does Jeff live?" });
   // const setMessage = () => useSetAtom(chatAtom);
 
   const res = await fetch("http://127.0.0.1:8000/stream", {
@@ -34,6 +33,7 @@ export async function GET() {
       .filter(Boolean);
 
     dataStrings.forEach((data: any) => {
+      console.log(data);
       const parsedData = JSON.parse(data);
       console.log(parsedData);
 
