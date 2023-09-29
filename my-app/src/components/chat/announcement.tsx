@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { inputAtom } from "@/lib/utils";
-import { useAtom } from "jotai";
+import { inputAtom } from "@/lib/hooks/use-chat";
+import { useSetAtom } from "jotai";
 
 interface AnnouncementProps {
   announcements?: string[];
@@ -12,12 +12,12 @@ const Announcement = ({
   announcements = [],
   title = "ChatUI",
 }: AnnouncementProps) => {
-  const [input, setInput] = useAtom(inputAtom);
+  const setInput = useSetAtom(inputAtom);
 
   return (
     <div className="flex h-full items-center justify-center prose animate-emerge">
       <div className="flex w-full flex-col items-center justify-center dark:text-white">
-        <h1 className="mb-2 w-3/4 text-center font-bold dark:text-stone-600">
+        <h1 className="text-7xl font mb-2 w-3/4 text-center font-bold dark:text-stone-600">
           {title}
         </h1>
         <div className="m-auto flex w-full flex-wrap justify-center dark:text-stone-600">

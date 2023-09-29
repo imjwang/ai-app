@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils";
 // import ExamplePrompts from "@/components/exampleprompts";
 import MessageBox from "./message-box";
 import Annoucement from "./announcement";
-import { useAtom } from "jotai";
-import { inputAtom } from "@/lib/utils";
+import { useAtom, useAtomValue } from "jotai";
+import { inputAtom, messageAtom, isLoadingAtom } from "@/lib/hooks/use-chat";
 
 interface ChatProps {
   className?: string;
@@ -25,9 +25,9 @@ export default function Chat({
   Announcement = Annoucement,
   announcements = [],
 }: ChatProps) {
-  const { handleSubmit, messages, isLoading } = useChat({ inputAtom });
-
   const [input, setInput] = useAtom(inputAtom);
+  const loading = useAtomValue(isLoadingAtom);
+  const message = useAtomValue(messageAtom);
 
   const chatRef = useRef<HTMLTextAreaElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -39,10 +39,10 @@ export default function Chat({
   };
 
   useEffect(() => {
-    if (isLoading === false) {
+    if (loading === false) {
       scrollToBottom();
     }
-  }, [isLoading]);
+  }, [loading]);
 
   const handleClick = (t: string) => {
     setInput(t);
@@ -58,16 +58,12 @@ export default function Chat({
         className
       )}
     >
-      {messages.length === 0 ? (
+      {message == null || message.size === 0 ? (
         <Announcement announcements={announcements} />
       ) : (
-        <ChatBox messages={messages} ref={containerRef} />
+        <ChatBox ref={containerRef} />
       )}
-      <ChatInput
-        handleSubmit={handleSubmit}
-        chatRef={chatRef}
-        placeholder="Send a message!"
-      />
+      <ChatInput chatRef={chatRef} placeholder="Send a message!" />
     </div>
   );
 }

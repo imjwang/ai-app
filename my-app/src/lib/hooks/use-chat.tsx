@@ -1,30 +1,61 @@
 import { atom, useAtomValue, useSetAtom, useAtom } from "jotai";
-import { parse } from "path";
 import { useCallback } from "react";
+import { nanoid } from "nanoid";
 
 export type Message = {
+  id: string;
   createdAt?: Date;
   content: string;
-  role: "system" | "user" | "assistant" | "function";
+  role: "user" | "assistant";
+};
+//TODO change into a store + provider
+const createChatAtoms = (initialValue = new Map()) => {
+  const baseAtom = atom<Map<string, Message>>(initialValue);
+  const valueAtom = atom(get => get(baseAtom));
+
+  const setAtom = atom(null, (get, set, update: Message) =>
+    set(baseAtom, prev => {
+      return new Map(
+        prev.set(update.id, {
+          id: update.id,
+          content: `${prev.has(update.id) ? prev.get(update.id)!.content : ""}${
+            update.content
+          }`,
+          role: update.role,
+        } as Message)
+      );
+    })
+  );
+  return [valueAtom, setAtom];
 };
 
-export const messageAtom = atom<Message | null>(null);
+const [messageAtom, setMessageAtom] = createChatAtoms();
+export { messageAtom };
 
+const chatAtomStore = {};
+// export const messageAtom = atom<Map<string, Message>>(new Map());
 export const inputAtom = atom("");
 export const isLoadingAtom = atom(false);
 export const isErrorAtom = atom(false);
 
 export function useChat() {
-  const setMessage = useSetAtom(messageAtom);
+  const [messages] = useAtom(messageAtom);
+  const [, setMessages] = useAtom(setMessageAtom);
+
+  // const setMessage = useSetAtom(messageAtom);
   const [input, setInput] = useAtom(inputAtom);
   const setError = useSetAtom(isErrorAtom);
   const setLoading = useSetAtom(isLoadingAtom);
 
   const searchHandler = useCallback(async () => {
     const body = JSON.stringify({ message: input });
+    const userid = nanoid();
+    setMessages({ id: userid, content: input, role: "user" } as Message);
+    const resid = nanoid();
     setInput("");
     setLoading(true);
     let res;
+    //TODO move this to api route
     try {
       res = await fetch("http://127.0.0.1:8000/stream", {
         method: "POST",
@@ -61,15 +92,12 @@ export function useChat() {
         .filter(Boolean);
 
       dataStrings.forEach((data: any) => {
-        // console.log(data);
         const parsedData = JSON.parse(data);
-        console.log(parsedData);
-        setMessage(e => {
-          return {
-            content: e?.content + parsedData.data,
-            role: "assistant",
-          } as Message;
-        });
+        setMessages({
+          id: resid,
+          content: parsedData.data,
+          role: "assistant",
+        } as Message);
       });
 
       await handleStreamRecursively();
@@ -77,7 +105,7 @@ export function useChat() {
 
     await handleStreamRecursively();
     setLoading(false);
-  }, [input, setError, setLoading, setMessage, setInput]);
+  }, [input, setError, setLoading, setMessages, setInput]);
 
   return {
     searchHandler,

@@ -19,6 +19,7 @@ specifiers:
   eslint-config-next: 13.4.19
   jotai: ^2.4.2
   lucide-react: ^0.279.0
+  nanoid: ^5.0.1
   next: 13.4.19
   next-auth: ^4.23.1
   next-themes: ^0.2.1
@@ -47,6 +48,7 @@ dependencies:
   eslint-config-next: 13.4.19_rngtr6f3b25lvetpihwplgecf4
   jotai: 2.4.2_dpmmhqj3uzrk25jjzo7arvivk4
   lucide-react: 0.279.0_react@18.2.0
+  nanoid: 5.0.1
   next: 13.4.19_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.23.1_m2l4knchnqa6bzxbbtfxlzoxdy
   next-themes: 0.2.1_m2l4knchnqa6bzxbbtfxlzoxdy
@@ -2420,6 +2422,12 @@ packages:
     resolution: {integrity: sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
+
+  /nanoid/5.0.1:
+    resolution: {integrity: sha512-vWeVtV5Cw68aML/QaZvqN/3QQXc6fBfIieAlu05m7FZW2Dgb+3f0xc0TTxuJW+7u30t7iSDTV/j3kVI0oJqIfQ==}
+    engines: {node: ^18 || >=20}
+    hasBin: true
+    dev: false
 
   /natural-compare/1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}

@@ -1,24 +1,23 @@
 import { Textarea } from "@/components/ui/textarea";
 import { useRef, useState } from "react";
 import SendButton from "./send";
-import { useAtom } from "jotai";
-import { inputAtom } from "@/lib/utils";
+import { useAtom, useAtomValue } from "jotai";
+import { inputAtom, useChat, isLoadingAtom } from "@/lib/hooks/use-chat";
 
 interface ChatFormProps {
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   placeholder?: string;
   setIsFocused: React.Dispatch<React.SetStateAction<boolean>>;
   chatRef: React.RefObject<HTMLTextAreaElement>;
 }
 
 const ChatForm = ({
-  handleSubmit,
   placeholder = "Message Patchy the Pirate! 🏴‍☠️",
   setIsFocused,
   chatRef,
 }: ChatFormProps) => {
+  const { searchHandler } = useChat();
   const formRef = useRef(null);
-  const [loading, setLoading] = useState(false);
+  const loading = useAtomValue(isLoadingAtom);
 
   const [input, setInput] = useAtom(inputAtom);
 
@@ -32,11 +31,9 @@ const ChatForm = ({
   };
 
   const handleform = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     handleResize(true);
-    setLoading(true);
-    handleSubmit(e);
-
-    setLoading(false);
+    searchHandler();
   };
 
   const handleEnter = (e: any) => {

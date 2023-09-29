@@ -13,6 +13,8 @@ from langchain.vectorstores import Chroma
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chains import RetrievalQA
 from langchain.chat_models import ChatOpenAI
+from langchain.llms.openai import OpenAI
+import logging
 import os
 from dotenv import load_dotenv
 import anyio
@@ -23,13 +25,21 @@ from functools import partial
 import json
 from pydantic import BaseModel
 import asyncio
-
+from langchain.callbacks import FinalStreamingStdOutCallbackHandler
+from langchain.chains import LLMChain
+from langchain.schema import (
+    HumanMessage
+)
+from langchain.prompts.chat import ChatPromptTemplate
+from langchain.prompts import PromptTemplate
 import uvicorn
-from langchain.callbacks import AsyncIteratorCallbackHandler
+from langchain.callbacks.streaming_aiter import AsyncIteratorCallbackHandler
+import langchain
 
+langchain.debug = True
 
 load_dotenv()
-
+logger = logging.getLogger(__name__)
 app = FastAPI()
 
 
@@ -134,6 +144,7 @@ class Message(BaseModel):
 @app.post("/chat/completions/")
 async def chat(request: Request, message: Message):
     results = await run_in_threadpool(qa.stream, message.message)
+
     if isinstance(results, Iterator):
         first_response = await run_in_threadpool(next, results)
 
@@ -154,8 +165,44 @@ async def chat(request: Request, message: Message):
 
 
 async def send_message(message: str) -> AsyncIterable[str]:
-    response_tokens = ""
-    print(message)
+    response_tokens = []
+    callback2 = AsyncIteratorCallbackHandler()
+    chat_llm = ChatOpenAI(
+        streaming=True,
+        verbose=True,
+        callbacks=[callback2],
+    )
+
+    TEST_PROMPT = ChatPromptTemplate.from_messages([
+        ("system", "You are a wondrous wizard of math."),
+        ("human", f"{message}"),
+    ])
+    headlessChain = LLMChain(llm=chat_llm, prompt=TEST_PROMPT)
+
+    llm = OpenAI(model_name="gpt-4",
+                 streaming=True, callbacks=[callback2])
+
+    embeddings = OpenAIEmbeddings()
+
+    prompt_template = """Use the following pieces of context to answer the question at the end. If you don't know the answer, make up a ridiculous one.
+
+{context}
+
+Question: {question}
+Answer like the most outrageous pirate and always make a joke after answering:
+"""
+
+    PROMPT = PromptTemplate(
+        template=prompt_template, input_variables=["context", "question"]
+    )
+
+    chain_type_kwargs = {"prompt": PROMPT}
+
+    db = Chroma(collection_name="my_collection", embedding_function=embeddings,
+                persist_directory=os.environ["PERSIST_DIRECTORY"])
+
+    qa = RetrievalQA.from_chain_type(llm, chain_type="stuff", retriever=db.as_retriever(
+    ), chain_type_kwargs=chain_type_kwargs, verbose=True)
 
     async def wrap_done(fn: Awaitable, event: asyncio.Event):
         """Wrap an awaitable with a event to signal when it's done or an exception is raised."""
@@ -171,18 +218,22 @@ async def send_message(message: str) -> AsyncIterable[str]:
     # Begin a task that runs in the background.
     # test getting chat history
     task = asyncio.create_task(wrap_done(
-        qa.acall(inputs=message),
+        # headlessChain.acall({}),
+        qa.acall(message),
         callback.done),
     )
 
-    async for token in callback.aiter():
+    async for token in callback2.aiter():
         # Use server-sent-events to stream the response
-        response_tokens += token
-        print(token, flush=True)
+        logger.info(f"Sending token: {token}")
+        response_tokens.append(token)
         test = {'data': token}
         yield f"data: {json.dumps(test)}"
 
     await task
+
+    test = "".join(response_tokens)
+    # print(test)
 
 
 class StreamRequest(BaseModel):

@@ -3,6 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { PaperPlaneIcon } from "@radix-ui/react-icons";
 import LoadingSpinner from "@/components/ui/spinner";
+import { useAtomValue } from "jotai";
+import { isLoadingAtom } from "@/lib/hooks/use-chat";
 
 import { cn } from "@/lib/utils";
 
@@ -12,7 +14,9 @@ interface SendButtonProps {
   disable?: boolean;
 }
 
-const SendButton = ({ className, loading, disable }: SendButtonProps) => {
+const SendButton = ({ className, disable }: SendButtonProps) => {
+  const loading = useAtomValue(isLoadingAtom);
+
   if (loading) return <LoadingSpinner className={className} />;
   return (
     <Button size="icon" className={className} type="submit" disabled={disable}>
