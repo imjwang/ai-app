@@ -4,15 +4,11 @@ import { Message } from "@/lib/hooks/use-chat";
 import { useAtomValue } from "jotai";
 import { messageAtom } from "@/lib/hooks/use-chat";
 
-interface MessageBoxProps {
-  messages: Message[];
-}
 
-const MessageBox = forwardRef<HTMLDivElement, MessageBoxProps>(
-  ({ messages }, ref) => {
+const MessageBox = forwardRef<HTMLDivElement>(
+  (_, ref) => {
     const message = useAtomValue(messageAtom);
-    const test = [...message.values()]
-      .reverse()
+    const messages = [...message.values()]
       .map(({ role, content, id }) => {
         return <MessageBubble key={id} variant={role} message={content} />;
       });
@@ -22,7 +18,7 @@ const MessageBox = forwardRef<HTMLDivElement, MessageBoxProps>(
         ref={ref}
         className="flex flex-col-reverse grow w-full mb-4 overflow-auto transition-[flex-grow] ease-in-out scroll-smooth"
       >
-        {test}
+        {messages}
       </div>
     );
   }

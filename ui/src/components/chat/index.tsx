@@ -1,14 +1,13 @@
 "use client";
 import Input from "./input";
 
-import { useChat } from "@/lib/ai";
 import { useRef, useEffect, useMemo } from "react";
 import { cn } from "@/lib/utils";
 // import ExamplePrompts from "@/components/exampleprompts";
 import MessageBox from "./message-box";
 import Annoucement from "./announcement";
-import { useAtom, useAtomValue } from "jotai";
-import { inputAtom, messageAtom, isLoadingAtom } from "@/lib/hooks/use-chat";
+import { useAtomValue } from "jotai";
+import { messageAtom, isLoadingAtom } from "@/lib/hooks/use-chat";
 
 interface ChatProps {
   className?: string;
@@ -25,7 +24,6 @@ export default function Chat({
   Announcement = Annoucement,
   announcements = [],
 }: ChatProps) {
-  const [input, setInput] = useAtom(inputAtom);
   const loading = useAtomValue(isLoadingAtom);
   const message = useAtomValue(messageAtom);
 
@@ -44,13 +42,6 @@ export default function Chat({
     }
   }, [loading]);
 
-  const handleClick = (t: string) => {
-    setInput(t);
-    if (chatRef) {
-      chatRef.current!.focus();
-    }
-  };
-
   return (
     <div
       className={cn(
@@ -59,7 +50,7 @@ export default function Chat({
       )}
     >
       {message == null || message.size === 0 ? (
-        <Announcement announcements={announcements} />
+        <Announcement announcements={announcements} chatRef={chatRef} />
       ) : (
         <ChatBox ref={containerRef} />
       )}

@@ -5,12 +5,13 @@ import { useSetAtom } from "jotai";
 interface AnnouncementProps {
   announcements?: string[];
   title?: string;
-  handleClick: (t: string) => void;
+  chatRef?: React.RefObject<HTMLTextAreaElement>;
 }
 
 const Announcement = ({
   announcements = [],
   title = "ChatUI",
+  chatRef,
 }: AnnouncementProps) => {
   const setInput = useSetAtom(inputAtom);
 
@@ -25,7 +26,13 @@ const Announcement = ({
             return (
               <Button
                 key={t}
-                onClick={() => setInput(t)}
+                onClick={() => {
+                  setInput(t)
+                  if (chatRef) {
+                    chatRef.current!.focus();
+                  }
+                }
+              }
                 className="rounded-full m-2"
                 variant="outline"
               >
