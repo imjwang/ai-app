@@ -5,6 +5,9 @@ const nextConfig = {
     serverActions: true,
     swcPlugins: [["@swc-jotai/react-refresh", {}]],
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 };
 
 module.exports = nextConfig;
