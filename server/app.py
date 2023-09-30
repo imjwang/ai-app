@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, HTTPException, Request
+from fastapi import FastAPI, UploadFile, HTTPException, Request, status
 from fastapi.responses import HTMLResponse, StreamingResponse
 from fastapi import FastAPI
 from fastapi import FastAPI, Form
@@ -7,7 +7,7 @@ from langchain.document_loaders.blob_loaders import Blob
 from langchain.document_loaders.parsers.generic import MimeTypeBasedParser
 from langchain.document_loaders.parsers.pdf import PyPDFParser
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from typing import Annotated, Iterator, AsyncIterable, Awaitable
+from typing import Annotated, Iterator, AsyncIterable, Awaitable, Optional
 from langchain.vectorstores import Chroma
 from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.chains import RetrievalQA
@@ -34,6 +34,7 @@ import uvicorn
 from langchain.callbacks.streaming_aiter import AsyncIteratorCallbackHandler
 import langchain
 import chromadb
+from chromadb import CollectionMetadata
 
 
 langchain.debug = True
@@ -235,6 +236,38 @@ def chroma():
     client = chromadb.PersistentClient(path=os.environ["PERSIST_DIRECTORY"])
     collections = client.list_collections()
     return collections
+
+
+@app.delete("/chroma", status_code=status.HTTP_200_OK)
+def chroma():
+    client = chromadb.PersistentClient(path=os.environ["PERSIST_DIRECTORY"])
+    result = client.reset()
+    if result:
+        return {"message": "chroma database reset"}
+
+    return {"message": "failed to reset chroma database"}
+
+
+class CreateCollectionRequest(BaseModel):
+    """
+    name - The name of the collection to create.
+    metadata - Optional metadata to associate with the collection.
+    embedding_function - Optional function to use to embed documents. Uses the default embedding function if not provided.
+    get_or_create - If True, return the existing collection if it exists.
+    """
+    name: str
+    metadata: Optional[CollectionMetadata] = None
+
+
+@app.post("/chroma", status_code=status.HTTP_201_CREATED)
+def chroma(body: CreateCollectionRequest):
+    client = chromadb.PersistentClient(path=os.environ["PERSIST_DIRECTORY"])
+    try:
+        client.create_collection(**body.dict())
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    return {"message": f"chroma collection: {body.name} created"}
 
 
 # TODO replace this or remove

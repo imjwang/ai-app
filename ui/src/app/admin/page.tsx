@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import Control from "./control";
 
 import type { Collection } from "chromadb";
 
@@ -41,6 +42,7 @@ export default async function Page() {
           ))}
         </TableBody>
       </Table>
+      <Control />
     </div>
   );
 }

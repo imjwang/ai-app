@@ -60,13 +60,12 @@ function ChatLayout({
   );
 }
 
-
-function HydrateAtoms ({initialValues, children}:any) {
+function HydrateAtoms({ initialValues, children }: any) {
   useHydrateAtoms(initialValues);
   return children;
 }
 
-export default function Chat({initialMessageValues = null}:any) {
+export default function Chat({ initialMessageValues = null }: any) {
   return (
     <Provider>
       <HydrateAtoms initialValues={[[initAtom, initialMessageValues]]}>
@@ -80,5 +79,5 @@ export default function Chat({initialMessageValues = null}:any) {
         />
       </HydrateAtoms>
     </Provider>
-  )
+  );
 }
