@@ -1,5 +1,5 @@
 import OpenAI from "openai";
-import { OpenAIStream, StreamingTextResponse } from "ai";
+import { NextResponse } from "next/server";
 
 const llamaCpp = new OpenAI({
   baseURL: "http://localhost:8000/",
@@ -17,15 +17,6 @@ export async function POST(req: Request) {
     max_tokens: 1000,
     messages,
   });
-  const res2 = await fetch("http://127.0.0.1:8000/chat/completions", {
-    method: "POST",
-    body: { message: "write a song about Jeff!" },
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
 
-  console.log(res2);
-  const stream = OpenAIStream(response);
-  return new StreamingTextResponse(stream);
+  NextResponse.json(response);
 }
