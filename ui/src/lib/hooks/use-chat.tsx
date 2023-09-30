@@ -1,4 +1,4 @@
-import { atom, useAtomValue, useSetAtom, useAtom } from "jotai";
+import { atom, useSetAtom, useAtom } from "jotai";
 import { useCallback } from "react";
 import { nanoid } from "nanoid";
 
@@ -35,14 +35,11 @@ const createChatAtoms = (initialValue = new Map()) => {
 const {valueAtom: messageAtom, setAtom: setMessageAtom, initAtom} = createChatAtoms();
 export { messageAtom, setMessageAtom, initAtom };
 
-const chatAtomStore = {};
-// export const messageAtom = atom<Map<string, Message>>(new Map());
 export const inputAtom = atom("");
 export const isLoadingAtom = atom(false);
 export const isErrorAtom = atom(false);
 
 export function useChat() {
-  const [messages] = useAtom(messageAtom);
   const [, setMessages] = useAtom(setMessageAtom);
 
   // const setMessage = useSetAtom(messageAtom);

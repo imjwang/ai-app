@@ -1,4 +1,3 @@
-from io import BytesIO
 from fastapi import FastAPI, UploadFile, HTTPException, Request
 from fastapi.responses import HTMLResponse, StreamingResponse
 from fastapi import FastAPI
@@ -25,7 +24,6 @@ from functools import partial
 import json
 from pydantic import BaseModel
 import asyncio
-from langchain.callbacks import FinalStreamingStdOutCallbackHandler
 from langchain.chains import LLMChain
 from langchain.schema import (
     HumanMessage
@@ -35,6 +33,8 @@ from langchain.prompts import PromptTemplate
 import uvicorn
 from langchain.callbacks.streaming_aiter import AsyncIteratorCallbackHandler
 import langchain
+import chromadb
+
 
 langchain.debug = True
 
@@ -121,11 +121,6 @@ async def upload_file(file: UploadFile | None = None):
         return {"filename": file.filename}
     except Exception as e:
         raise HTTPException(status_code=400, detail="File upload failed.")
-
-
-@app.get("/test/")
-async def test():
-    return {"test": "test"}
 
 
 @app.post("/query/")
@@ -246,6 +241,14 @@ def stream(body: StreamRequest):
     return StreamingResponse(send_message(body.message), media_type="text/event-stream")
 
 
+@app.get("/chroma")
+def chroma():
+    client = chromadb.PersistentClient(path=os.environ["PERSIST_DIRECTORY"])
+    collections = client.list_collections()
+    return collections
+
+
+# TODO replace this or remove
 @app.get("/")
 def main():
     content = """

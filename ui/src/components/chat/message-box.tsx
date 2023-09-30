@@ -1,6 +1,5 @@
 import MessageBubble from "./message";
 import { forwardRef } from "react";
-import { Message } from "@/lib/hooks/use-chat";
 import { useAtomValue } from "jotai";
 import { messageAtom } from "@/lib/hooks/use-chat";
 
@@ -9,6 +8,7 @@ const MessageBox = forwardRef<HTMLDivElement>(
   (_, ref) => {
     const message = useAtomValue(messageAtom);
     const messages = [...message.values()]
+      .reverse()
       .map(({ role, content, id }) => {
         return <MessageBubble key={id} variant={role} message={content} />;
       });

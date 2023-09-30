@@ -6,8 +6,9 @@ import { cn } from "@/lib/utils";
 // import ExamplePrompts from "@/components/exampleprompts";
 import MessageBox from "./message-box";
 import Annoucement from "./announcement";
-import { useAtomValue } from "jotai";
-import { messageAtom, isLoadingAtom } from "@/lib/hooks/use-chat";
+import { useAtomValue, Provider } from "jotai";
+import { messageAtom, isLoadingAtom, initAtom } from "@/lib/hooks/use-chat";
+import { useHydrateAtoms } from "jotai/utils";
 
 interface ChatProps {
   className?: string;
@@ -17,7 +18,7 @@ interface ChatProps {
   announcements?: string[];
 }
 
-export default function Chat({
+function ChatLayout({
   className,
   ChatInput = Input,
   ChatBox = MessageBox,
@@ -57,4 +58,27 @@ export default function Chat({
       <ChatInput chatRef={chatRef} placeholder="Send a message!" />
     </div>
   );
+}
+
+
+function HydrateAtoms ({initialValues, children}:any) {
+  useHydrateAtoms(initialValues);
+  return children;
+}
+
+export default function Chat({initialMessageValues = null}:any) {
+  return (
+    <Provider>
+      <HydrateAtoms initialValues={[[initAtom, initialMessageValues]]}>
+        <ChatLayout
+          className="p-2 lg:pb-12 lg:px-64 md:px-48 md:pb-8 sm:px-32 sm:pb-6"
+          announcements={[
+            "Who was the first person on the Moon?",
+            "What is the capital of France?",
+            "What is the largest country in the world?",
+          ]}
+        />
+      </HydrateAtoms>
+    </Provider>
+  )
 }

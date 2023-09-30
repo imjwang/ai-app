@@ -1,13 +1,11 @@
 "use client";
 
 // import { RenderConversations } from "@/components/documentchat";
-import { useChat } from "ai/react";
 import { useRef } from "react";
 import { getDate } from "@/lib/utils";
 
 export default function Page() {
-  const { setInput, input, handleInputChange, handleSubmit, messages } =
-    useChat();
+
 
   const chatRef = useRef(null);
 
