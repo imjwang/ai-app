@@ -16,9 +16,9 @@ const Announcement = ({
   const setInput = useSetAtom(inputAtom);
 
   return (
-    <div className="flex h-full items-center justify-center prose prose-2xl animate-emerge">
-      <div className="flex w-full flex-col items-center justify-center dark:text-white">
-        <h1 className="font mb-2 w-3/4 p-2 text-center font-bold dark:text-stone-600">
+    <div className="flex h-full items-center prose prose-2xl animate-emerge">
+      <div className="flex w-full flex-col items-center dark:text-white">
+        <h1 className="w-3/4 text-center font-bold dark:text-stone-600">
           {title}
         </h1>
         <div className="flex w-3/4 flex-wrap gap-2 justify-center dark:text-stone-600">

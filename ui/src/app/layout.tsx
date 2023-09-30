@@ -2,7 +2,6 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import JotaiProvider from "@/components/jotai-provider";
-import NavBar from "@/components/navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,8 +22,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <body className={inter.className}>
           <JotaiProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <div className="flex flex-col h-[100vh] bg-stone-100 dark:bg-stone-900">
-                <NavBar />
+              <div className="flex flex-col min-h-screen bg-stone-100 dark:bg-stone-900">
                 {children}
               </div>
             </ThemeProvider>
