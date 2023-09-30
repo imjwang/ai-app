@@ -14,9 +14,13 @@ const DialogTrigger = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Trigger> & {
     asChild?: boolean;
   }
->(({ className, asChild = false, ...props }, ref) => {
+>(({ className, asChild = false, children, ...props }, ref) => {
   const Comp = asChild ? Slot : DialogPrimitive.Trigger;
-  return <Comp ref={ref} {...props} />;
+  return (
+    <Comp ref={ref} {...props}>
+      {children}
+    </Comp>
+  );
 });
 DialogTrigger.displayName = DialogPrimitive.Trigger.displayName;
 
