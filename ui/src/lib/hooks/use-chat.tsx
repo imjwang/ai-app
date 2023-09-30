@@ -28,11 +28,15 @@ const createChatAtoms = (initialValue = new Map()) => {
   );
   const initAtom = atom(null, (get, set) => {
     set(baseAtom, new Map());
-  })
-  return {valueAtom, setAtom, initAtom};
+  });
+  return { valueAtom, setAtom, initAtom };
 };
 
-const {valueAtom: messageAtom, setAtom: setMessageAtom, initAtom} = createChatAtoms();
+const {
+  valueAtom: messageAtom,
+  setAtom: setMessageAtom,
+  initAtom,
+} = createChatAtoms();
 export { messageAtom, setMessageAtom, initAtom };
 
 export const inputAtom = atom("");

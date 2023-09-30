@@ -162,17 +162,6 @@ async def chat(request: Request, message: Message):
 async def send_message(message: str) -> AsyncIterable[str]:
     response_tokens = []
     callback2 = AsyncIteratorCallbackHandler()
-    chat_llm = ChatOpenAI(
-        streaming=True,
-        verbose=True,
-        callbacks=[callback2],
-    )
-
-    TEST_PROMPT = ChatPromptTemplate.from_messages([
-        ("system", "You are a wondrous wizard of math."),
-        ("human", f"{message}"),
-    ])
-    headlessChain = LLMChain(llm=chat_llm, prompt=TEST_PROMPT)
 
     llm = OpenAI(model_name="gpt-4",
                  streaming=True, callbacks=[callback2])

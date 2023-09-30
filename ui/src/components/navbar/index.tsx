@@ -7,7 +7,7 @@ const NavBar = () => {
   return (
     <nav className="h-fit bg-green-700 dark:bg-background w-screen flex flex-col">
       <div className="flex flex-row place-content-between items-center p-2">
-        <Link className="no-underline" href="/">
+        <Link className="no-underline" href="/chat">
           <div className="prose">
             <h1 className="text-green-300 dark:text-green-700 cursor-pointer select-none">
               chaatUI

@@ -21,10 +21,10 @@ const NavMenu = () => {
       <NavigationMenuList>
         <NavigationMenuItem
           className={`${
-            pathname === "/" ? "text-primary border-b-2 border-primary" : ""
+            pathname === "/chat" ? "text-primary border-b-2 border-primary" : ""
           }`}
         >
-          <Link href="/" legacyBehavior passHref>
+          <Link href="/chat" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               Chat
             </NavigationMenuLink>

@@ -1,6 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { atom } from "jotai";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -16,7 +15,3 @@ export const getDate = (date: Date | undefined) => {
   });
   return dateString;
 };
-
-export const inputAtom = atom("");
-
-export const chatAtom = atom("");

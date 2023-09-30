@@ -12,6 +12,7 @@ specifiers:
   '@types/react': 18.2.22
   '@types/react-dom': 18.2.7
   autoprefixer: ^10.4.16
+  chromadb: ^1.5.11
   class-variance-authority: ^0.7.0
   clsx: ^2.0.0
   eslint: 8.49.0
@@ -40,6 +41,7 @@ dependencies:
   '@types/node': 20.6.2
   '@types/react': 18.2.22
   '@types/react-dom': 18.2.7
+  chromadb: 1.5.11_openai@4.10.0
   class-variance-authority: 0.7.0
   clsx: 2.0.0
   eslint: 8.49.0
@@ -1134,6 +1136,24 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
 
+  /chromadb/1.5.11_openai@4.10.0:
+    resolution: {integrity: sha512-mIg0DtWZFsf4hl05orRixIw3lBYKUc4AGydbUQVwd7sjwaCsgP1j0qHwYxoopj2H1L7yc8OUyFKhi79MoFMoMQ==}
+    engines: {node: '>=14.17.0'}
+    peerDependencies:
+      cohere-ai: ^5.0.0 || ^6.0.0
+      openai: ^3.0.0 || ^4.0.0
+    peerDependenciesMeta:
+      cohere-ai:
+        optional: true
+      openai:
+        optional: true
+    dependencies:
+      isomorphic-fetch: 3.0.0
+      openai: 4.10.0
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
   /class-variance-authority/0.7.0:
     resolution: {integrity: sha512-jFI8IQw4hczaL4ALINxqLEXQbWcNjoSkloa4IaufXCJr6QawJyw7tuRysRsrE8w2p/4gGaxKIt/hX3qz/IbD1A==}
     dependencies:
@@ -2178,6 +2198,15 @@ packages:
 
   /isexe/2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
+    dev: false
+
+  /isomorphic-fetch/3.0.0:
+    resolution: {integrity: sha512-qvUtwJ3j6qwsF3jLxkZ72qCgjMysPzDfeV240JHiGZsANBYd+EEuu35v7dfrJ9Up0Ak07D7GGSkGhCHTqg/5wA==}
+    dependencies:
+      node-fetch: 2.7.0
+      whatwg-fetch: 3.6.19
+    transitivePeerDependencies:
+      - encoding
     dev: false
 
   /iterator.prototype/1.1.2:
@@ -3365,6 +3394,10 @@ packages:
 
   /webidl-conversions/3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
+    dev: false
+
+  /whatwg-fetch/3.6.19:
+    resolution: {integrity: sha512-d67JP4dHSbm2TrpFj8AbO8DnL1JXL5J9u0Kq2xW6d0TFDbCA3Muhdt8orXC22utleTVj7Prqt82baN6RBvnEgw==}
     dev: false
 
   /whatwg-url/5.0.0:
