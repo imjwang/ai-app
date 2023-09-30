@@ -44,7 +44,12 @@ export default function Control() {
         />
         <Button type="submit">Add</Button>
       </form>
-      <Button variant="destructive" size="lg" onClick={handleDeleteDatabase}>
+      <Button
+        variant="destructive"
+        size="lg"
+        className="max-w-[12rem]"
+        onClick={handleDeleteDatabase}
+      >
         Reset Database
       </Button>
     </>

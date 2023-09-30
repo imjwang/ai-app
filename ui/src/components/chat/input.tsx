@@ -13,7 +13,7 @@ interface ChatInputProps {
 const ChatInput = ({ placeholder, tip = true, chatRef }: ChatInputProps) => {
   const [isFocused, setIsFocused] = useState(false);
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex w-full flex-col gap-3">
       <ChatForm
         setIsFocused={setIsFocused}
         chatRef={chatRef}

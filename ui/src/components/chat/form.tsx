@@ -44,11 +44,11 @@ const ChatForm = ({
 
   return (
     <form
-      className="flex items-center my-2 relative"
+      className="flex items-center relative"
       onSubmit={handleform}
       ref={formRef}
     >
-      <div className="w-full ">
+      <div className="w-full">
         <Textarea
           className="pr-20 text-lg resize-none"
           placeholder={placeholder}
@@ -64,7 +64,7 @@ const ChatForm = ({
         />
       </div>
       <SendButton
-        className="absolute w-12 h-10 mr-1 right-0.5 bottom-1"
+        className="absolute w-12 h-10 right-1 bottom-1"
         loading={loading}
         disable={input === "" || loading}
       />
