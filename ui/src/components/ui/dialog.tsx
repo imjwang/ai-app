@@ -13,6 +13,7 @@ const DialogTrigger = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Trigger> & {
     asChild?: boolean;
+    children?: React.ReactNode;
   }
 >(({ className, asChild = false, children, ...props }, ref) => {
   const Comp = asChild ? Slot : DialogPrimitive.Trigger;
