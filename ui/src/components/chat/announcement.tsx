@@ -18,7 +18,7 @@ const Announcement = ({
   return (
     <div className="flex h-full items-center prose prose-2xl animate-emerge">
       <div className="flex w-full flex-col items-center dark:text-white">
-        <h1 className="w-3/4 text-center font-bold dark:text-stone-600">
+        <h1 className="w-3/4 text-center font-bold dark:text-stone-600 m-2">
           {title}
         </h1>
         <div className="flex w-3/4 flex-wrap gap-2 justify-center dark:text-stone-600">
@@ -32,7 +32,7 @@ const Announcement = ({
                     chatRef.current!.focus();
                   }
                 }}
-                className="rounded-full"
+                className="rounded-full hover:bg-orange-500"
                 variant="outline"
               >
                 {t}
