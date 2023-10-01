@@ -34,7 +34,7 @@ export default function Page() {
   }
 
   return (
-    <div className="flex w-full h-full justify-around">
+    <div className="flex w-full h-[200vh] justify-around">
       <Chat
         announcements={[
           "Where is Thomas Jefferson's Home?",
@@ -44,7 +44,7 @@ export default function Page() {
         className="p-12"
       />
       <Separator orientation="vertical" />
-      <div className="w-[50vw] p-10 overflow-hidden">
+      <div className="w-[70vw] h-[120vh] p-10 overflow-hidden">
         <div className="">
           <label htmlFor="file">Load from file:</label>{" "}
           <input onChange={onFileChange} type="file" />

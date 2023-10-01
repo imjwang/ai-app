@@ -5,7 +5,7 @@ import Link from "next/link";
 export default async function Page() {
   return (
     <>
-      <div className="sticky isolate p-64 h-[80vh] top-0 justify-center flex">
+      <div className="sticky isolate p-64 h-[80vh] top-0 justify-center flex flex-col items-center">
         <Blobs />
         <div className="max-w-2xl p-12 z-10 round-lg">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
@@ -22,7 +22,7 @@ export default async function Page() {
           </div>
           <div className="prose prose-2xl text-center">
             <h1 className="tracking-tight text-bold dark:text-green-300">
-              Welcome to the UI for Chat!!
+              Welcome to the UI for Chat!! 🎉
             </h1>
             <p className="text-lg leading-8 text-gray-600 dark:text-yellow-300">
               Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
