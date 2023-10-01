@@ -65,18 +65,18 @@ function HydrateAtoms({ initialValues, children }: any) {
   return children;
 }
 
-export default function Chat({ initialMessageValues = null }: any) {
+export default function Chat({
+  className,
+  ChatInput = Input,
+  ChatBox = MessageBox,
+  Announcement = Annoucement,
+  announcements = [],
+  initialMessageValues = null,
+}: ChatProps & { initialMessageValues?: any }) {
   return (
     <Provider>
       <HydrateAtoms initialValues={[[initAtom, initialMessageValues]]}>
-        <ChatLayout
-          className="p-2 lg:pb-12 lg:px-64 md:px-48 md:pb-8 sm:px-32 sm:pb-6"
-          announcements={[
-            "Who was the first person on the Moon?",
-            "What is the capital of France?",
-            "What is the largest country in the world?",
-          ]}
-        />
+        <ChatLayout className={className} announcements={announcements} />
       </HydrateAtoms>
     </Provider>
   );
