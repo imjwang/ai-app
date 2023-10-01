@@ -22,7 +22,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <body className={inter.className}>
           <JotaiProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <div className="min-h-screen dark:bg-stone-900 dark:selection:bg-orange-700 dark:selection:text-white selection:bg-green-300 selection:text-black">
+              <div className="min-h-screen bg-stone-50 dark:bg-stone-900 dark:selection:bg-orange-700 dark:selection:text-white selection:bg-green-300 selection:text-black">
                 {children}
               </div>
             </ThemeProvider>

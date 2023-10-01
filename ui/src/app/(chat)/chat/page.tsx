@@ -3,7 +3,7 @@ import Chat from "@/components/chat";
 
 export default function Home() {
   return (
-    <>
+    <div className="flex w-full h-[85vh] justify-around">
       <Chat
         className="p-2 lg:pb-12 lg:px-64 md:px-48 md:pb-8 sm:px-32 sm:pb-6"
         announcements={[
@@ -12,6 +12,6 @@ export default function Home() {
           "What is the largest country in the world?",
         ]}
       />
-    </>
+    </div>
   );
 }
