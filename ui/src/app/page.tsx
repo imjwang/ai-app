@@ -40,12 +40,12 @@ export default async function Page() {
           </div>
         </div>
       </div>
-      <div className="dark:bg-black bg-green-300 h-[300vh] pl-64 pt-64 sticky top-0">
+      <div className="dark:bg-black bg-green-300 h-[300vh] pl-64 pt-64 sticky top-0 selection:bg-white">
         <div className="prose prose-2xl w-1/4 prose-white dark:prose-invert">
           <h1>It doesn&apos;t have to be so hard</h1>
         </div>
       </div>
-      <div className="dark:bg-black bg-amber-300 h-[300vh] pl-64 pt-64 sticky top-0">
+      <div className="dark:bg-black bg-amber-300 h-[300vh] pl-64 pt-64 sticky top-0 dark:selection:bg-green-700">
         <div className="prose prose-2xl w-1/4 prose-white dark:prose-invert">
           <h1>It doesn&apos;t have to be so hard</h1>
         </div>

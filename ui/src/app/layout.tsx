@@ -22,7 +22,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <body className={inter.className}>
           <JotaiProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <div className="flex flex-col min-h-screen bg-stone-100 dark:bg-stone-900">
+              <div className="flex flex-col min-h-screen bg-stone-100 dark:bg-stone-900 dark:selection:bg-orange-700 dark:selection:text-white selection:bg-green-300 selection:text-black">
                 {children}
               </div>
             </ThemeProvider>
