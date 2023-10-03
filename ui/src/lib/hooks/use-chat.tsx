@@ -59,15 +59,17 @@ export function useChat() {
     setInput("");
     setLoading(true);
     let res;
-    //TODO move this to api route
+    //TODO let it be configurable
     try {
-      res = await fetch("http://127.0.0.1:8000/stream", {
+      // res = await fetch("http://127.0.0.1:8000/stream", {
+      res = await fetch("/api/chat", {
         method: "POST",
         body,
         headers: {
           "Content-Type": "application/json",
         },
       });
+      console.log(res);
     } catch (error) {
       setError(true);
       setLoading(false);

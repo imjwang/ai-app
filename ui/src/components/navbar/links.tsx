@@ -56,6 +56,19 @@ const NavMenu = () => {
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
+        <NavigationMenuItem
+          className={`${
+            pathname === "/playground"
+              ? "text-primary border-b-2 border-primary"
+              : ""
+          }`}
+        >
+          <Link href="/playground" legacyBehavior passHref>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              Playground!
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
   );
